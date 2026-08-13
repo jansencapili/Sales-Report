@@ -62,4 +62,5 @@ Regional Strategy: Region-level filtering supports territory-specific planning a
 Campaign ROI (via data model): Linked campaign spend and promotion coverage data enables future analysis of which campaigns are driving revenue by product.
 Screenshots / Demos
 
-Data model and dashboard preview images included in the project files.
+Sales Report Dashboard
+https://github.com/jansencapili/Sales-Report/blob/main/Snapshot_of_the_dashboard.png
