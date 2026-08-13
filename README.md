@@ -63,4 +63,4 @@ Campaign ROI (via data model): Linked campaign spend and promotion coverage data
 Screenshots / Demos
 
 Sales Report Dashboard
-![Dashboard_Preview].(https://github.com/jansencapili/Sales-Report/blob/main/Snapshot_of_the_dashboard.png)
+![Dashboard_Preview](https://github.com/jansencapili/Sales-Report/blob/main/Snapshot_of_the_dashboard.png)
