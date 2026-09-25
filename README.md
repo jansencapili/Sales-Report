@@ -1,98 +1,113 @@
-# Sales-Report
-Sales Report: Global Sales Performance Dashboard
+# 📊 Global Sales Performance Dashboard
 
-An interactive Power BI report built to track revenue performance, order volume, customer activity, and inventory levels across regions, product categories, and time — with drill-down support for sales targets and campaign effectiveness.
+An interactive **Power BI Sales Analytics Dashboard** designed to monitor revenue, order activity, customer performance, inventory levels, and sales target attainment across regions, product categories, and time.
 
-Short Description / Purpose
+The project combines sales, inventory, order processing, sales targets, and marketing campaign data into a single analytical model to provide a broader view of business performance.
 
-The Sales Report Dashboard is a Power BI report designed to help sales and operations teams monitor revenue, orders, and target attainment across regions and product categories, while also connecting that performance to inventory levels, order fulfillment, and marketing campaign activity. It's built for sales managers, revenue analysts, and operations teams who need a single view spanning sales, inventory, and campaign data.
+---
 
-Tech Stack
+## 📌 Project Overview
 
-The dashboard was built using the following tools and technologies:
+Sales teams often need to look at multiple sources to understand whether revenue is performing as expected.
 
-📊 Power BI Desktop – Main data visualization platform used for report creation.
+This dashboard brings key business metrics into one interactive Power BI report, allowing users to explore:
 
-📂 Power Query – Data transformation and cleaning layer for reshaping and preparing the data.
+- 💰 Revenue performance
+- 🛒 Order activity
+- 👥 Customer activity
+- 🎯 Sales target attainment
+- 📦 Inventory levels
+- 🌎 Regional performance
+- 📢 Campaign and promotion data
 
-🧠 DAX (Data Analysis Expressions) – Used for calculated measures (housed in a dedicated _measures table), KPIs, and conditional logic.
+The report is designed for **sales managers, business analysts, and operations teams** who need a consolidated view of sales performance.
 
-📝 Data Modeling – A star-schema-style model connecting fact tables (fact_sales, fact_inventory, fact_order_process, fact_campaign_spend, fact_promotion_coverage, fact_sales_targets) to shared dimension tables (dim_customer, dim_product, dim_geo, dim_date, dim_campaign, dim_order_flags), enabling cross-filtering across sales, inventory, and marketing.
+---
 
-🔒 Row-Level Security – A security table mapping user_email to region, restricting each user's view to their own region.
+# 🎯 Business Objective
 
-📁 File Format – .pbit (Power BI template) for development and .png for data model and dashboard previews.
-Data Source
+The main objective of this project is to create a centralized sales performance report that helps answer questions such as:
 
-The model is built around a central fact_sales table (line-level sales transactions with order dates, discounts, and line totals) joined to:
+- Are sales on track against the target?
+- Which regions are generating the most revenue?
+- Which product categories contribute the most sales?
+- Are inventory levels aligned with sales demand?
+- Which regions or categories may require further investigation?
+- Can campaign and promotion data be connected to sales performance?
 
-dim_customer – customer details including region, segment, credit limit, and payment terms
+Instead of analyzing these areas separately, the dashboard brings them together into one interactive report.
 
-dim_product – product hierarchy (category, subcategory, brand, supplier, unit price)
+---
 
-dim_geo – city/region geography
+# 🛠️ Technology Stack
 
-dim_date – calendar table (Date, Month, Year) driving time-based analysis
+| Tool / Technology | Purpose |
+|-------------------|---------|
+| **Power BI Desktop** | Dashboard development and data visualization |
+| **Power Query** | Data cleaning, transformation, and preparation |
+| **DAX** | Measures, KPIs, calculations, and business logic |
+| **Data Modeling** | Connecting fact and dimension tables |
+| **Row-Level Security (RLS)** | Restricting regional data access by user |
+| **Power BI Template (.pbit)** | Reusable report development format |
+| **PNG** | Dashboard and data model previews |
 
-dim_campaign / fact_campaign_spend / fact_promotion_coverage – marketing campaign budgets, spend, clicks, impressions, and which products each campaign covers
+---
 
-fact_inventory – inventory levels by product and date
+# 🏗️ Data Model
 
-fact_order_process – order lifecycle timestamps (order, invoice, delivery, order-to-pay duration)
+The report uses a **star-schema-style data model** with multiple fact tables connected to shared dimensions.
 
-fact_sales_targets – target revenue by period, used to calculate attainment
+### Fact Tables
 
-dim_order_flags – order/channel flags and priority tagging
+- `fact_sales`
+- `fact_inventory`
+- `fact_order_process`
+- `fact_campaign_spend`
+- `fact_promotion_coverage`
+- `fact_sales_targets`
 
-Features / Highlights
+### Dimension Tables
 
-Business Problem Sales and operations stakeholders need to know, at a glance, whether revenue is on pace against targets — and why — without stitching together separate sales, inventory, and campaign reports. Questions like "which regions are underperforming their targets?" or "is a revenue dip tied to low inventory or under-invested campaigns?" are hard to answer from raw transactional data alone.
+- `dim_customer`
+- `dim_product`
+- `dim_geo`
+- `dim_date`
+- `dim_campaign`
+- `dim_order_flags`
 
-Goal of the Dashboard To deliver a single interactive report that:
+A dedicated `_measures` table is also used to organize DAX measures and keep the model easier to maintain.
 
-Tracks revenue, orders, active customers, and target attainment in real time
+---
 
-Lets users slice performance by year and region
+## 🔗 Data Model Overview
 
-Connects sales trends to product category performance and inventory levels
+The central `fact_sales` table contains line-level sales transactions and connects with supporting dimensions and business-process fact tables.
 
-Supports fast identification of underperforming regions or categories
+```text
+                         ┌───────────────┐
+                         │  dim_customer │
+                         └───────┬───────┘
+                                 │
+                                 │
+┌────────────┐           ┌───────▼───────┐           ┌─────────────┐
+│  dim_date  │──────────▶│   fact_sales  │◀──────────│ dim_product │
+└────────────┘           └───────┬───────┘           └─────────────┘
+                                 │
+                    ┌────────────┼────────────┐
+                    │            │            │
+                    ▼            ▼            ▼
+             fact_inventory  sales_targets  dim_geo
+                    │
+                    │
+                    ▼
+             Inventory Analysis
 
-
-Walkthrough of Key Visuals
-
-Key KPIs (Top Left)
-
-Revenue: 527K
-
-Total Orders: 80
-
-Active Customers: 47
-
-Target Sales %: 95.41%
-
-Year & Region Filter Panel Slicers for Year (2025, 2026) and Region (Asia Pacific, Europe, Latin America, Middle East) let users filter every visual on the page simultaneously.
-
-Total Revenue by Category (Bar Chart) Ranks product categories — Electronics, Apparel, Home, Sports, Beauty, Industrial — by revenue generated, highlighting which categories drive the most sales.
-
-Total Inventory by Category (Bar Chart) Shows current inventory levels by category, allowing quick comparison against revenue performance to spot potential stock-driven sales constraints.
-
-Sum of Line Total by Month (Area Chart) Tracks revenue trend across the calendar year, surfacing seasonal peaks and dips in sales activity.
-
-Year/Region Summary Table A detailed breakdown of Revenue, Total Orders, and Target Sales % by Year and Region, with grand totals — the go-to view for identifying which regions are hitting or missing targets.
-
-Business Impact & Insights
-
-Target Tracking: Sales leadership can immediately see attainment against target (95.41% overall) and drill into which regions are lagging.
-
-Inventory-Aware Planning: Comparing revenue by category against inventory by category helps flag categories at risk of stockouts or overstock.
-
-Regional Strategy: Region-level filtering supports territory-specific planning and resourcing decisions.
-
-Campaign ROI (via data model): Linked campaign spend and promotion coverage data enables future analysis of which campaigns are driving revenue by product.
-
-
-Screenshots / Demos
-
-Sales Report Dashboard
-![Dashboard_Preview](https://github.com/jansencapili/Sales-Report/blob/main/Snapshot_of_the_dashboard.png)
+       Marketing & Promotion Data
+                    │
+          ┌─────────┴──────────┐
+          ▼                    ▼
+ fact_campaign_spend   fact_promotion_coverage
+          │                    │
+          └─────────┬──────────┘
+                    ▼
+            Campaign Analysis
