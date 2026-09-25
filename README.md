@@ -1,16 +1,29 @@
 # 📊 Global Sales Performance Dashboard
 
-An interactive **Power BI Sales Analytics Dashboard** designed to monitor revenue, order activity, customer performance, inventory levels, and sales target attainment across regions, product categories, and time.
+**An interactive Power BI dashboard for monitoring revenue, orders, customers, inventory, and target attainment across regions and time.**
 
-The project combines sales, inventory, order processing, sales targets, and marketing campaign data into a single analytical model to provide a broader view of business performance.
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![Data Analytics](https://img.shields.io/badge/Data%20Analytics-Dashboard-2E86AB?style=for-the-badge)
+
+> Sales, inventory, order processing, targets, and campaign data — combined into a single analytical model, instead of scattered across separate reports.
+
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Dashboard at a Glance](#dashboard-at-a-glance)
+- [Business Objective](#business-objective)
+- [Report Features](#report-features)
+- [Tech Stack](#tech-stack)
+- [Data Model](#data-model)
+- [Getting Started](#getting-started)
+- [Repository Structure](#repository-structure)
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
-Sales teams often need to look at multiple sources to understand whether revenue is performing as expected.
+Sales teams often have to pull from multiple sources just to answer one question: *is revenue performing as expected?*
 
-This dashboard brings key business metrics into one interactive Power BI report, allowing users to explore:
+This dashboard brings the key business metrics into a single interactive Power BI report, so that question — and the ones around it — can be answered from one place:
 
 - 💰 Revenue performance
 - 🛒 Order activity
@@ -20,45 +33,66 @@ This dashboard brings key business metrics into one interactive Power BI report,
 - 🌎 Regional performance
 - 📢 Campaign and promotion data
 
-The report is designed for **sales managers, business analysts, and operations teams** who need a consolidated view of sales performance.
+Built for **sales managers, business analysts, and operations teams** who need one consolidated view rather than five separate ones.
 
 ---
 
-# 🎯 Business Objective
+## Dashboard at a Glance
 
-The main objective of this project is to create a centralized sales performance report that helps answer questions such as:
+![Sales Report Dashboard](Snapshot_of_the_dashboard.png)
 
-- Are sales on track against the target?
+| Metric | Value |
+|---|---|
+| Revenue | **527K** |
+| Total Orders | **80** |
+| Active Customers | **47** |
+| Target Sales % | **95.41%** |
+
+---
+
+## Business Objective
+
+The report is built to answer questions like:
+
+- Are sales on track against target?
 - Which regions are generating the most revenue?
 - Which product categories contribute the most sales?
 - Are inventory levels aligned with sales demand?
-- Which regions or categories may require further investigation?
+- Which regions or categories need further investigation?
 - Can campaign and promotion data be connected to sales performance?
 
-Instead of analyzing these areas separately, the dashboard brings them together into one interactive report.
+Rather than analyzing these areas separately, the dashboard brings them together into one interactive report.
 
 ---
 
-# 🛠️ Technology Stack
+## Report Features
+
+- 📈 **Revenue by category** — bar chart ranking product categories (Electronics leads, followed by Apparel, Home, Sports, Beauty, and Industrial)
+- 📊 **Inventory by category** — horizontal bar chart, so stock levels can be checked against sales performance at a glance
+- 📉 **Monthly revenue trend** — a full Jan–Dec view of `line_total` to spot seasonality
+- 🌍 **Year × Region breakdown** — Revenue, Total Orders, and Target Sales % split across 2025/2026 and all four regions, with grand totals
+- 🎚️ **Interactive filtering** — slice the whole report by Year and Region
+
+---
+
+## Tech Stack
 
 | Tool / Technology | Purpose |
-|-------------------|---------|
+|---|---|
 | **Power BI Desktop** | Dashboard development and data visualization |
 | **Power Query** | Data cleaning, transformation, and preparation |
 | **DAX** | Measures, KPIs, calculations, and business logic |
 | **Data Modeling** | Connecting fact and dimension tables |
 | **Row-Level Security (RLS)** | Restricting regional data access by user |
 | **Power BI Template (.pbit)** | Reusable report development format |
-| **PNG** | Dashboard and data model previews |
 
 ---
 
-# 🏗️ Data Model
+## Data Model
 
-The report uses a **star-schema-style data model** with multiple fact tables connected to shared dimensions.
+The report uses a **star-schema-style data model**, with multiple fact tables connected to shared dimensions.
 
-### Fact Tables
-
+**Fact tables**
 - `fact_sales`
 - `fact_inventory`
 - `fact_order_process`
@@ -66,8 +100,7 @@ The report uses a **star-schema-style data model** with multiple fact tables con
 - `fact_promotion_coverage`
 - `fact_sales_targets`
 
-### Dimension Tables
-
+**Dimension tables**
 - `dim_customer`
 - `dim_product`
 - `dim_geo`
@@ -75,13 +108,7 @@ The report uses a **star-schema-style data model** with multiple fact tables con
 - `dim_campaign`
 - `dim_order_flags`
 
-A dedicated `_measures` table is also used to organize DAX measures and keep the model easier to maintain.
-
----
-
-## 🔗 Data Model Overview
-
-The central `fact_sales` table contains line-level sales transactions and connects with supporting dimensions and business-process fact tables.
+A dedicated `_measures` table keeps DAX measures organized and separate from the data tables.
 
 ```text
                          ┌───────────────┐
@@ -111,3 +138,25 @@ The central `fact_sales` table contains line-level sales transactions and connec
           └─────────┬──────────┘
                     ▼
             Campaign Analysis
+```
+
+---
+
+## Getting Started
+
+1. **Clone or download** this repository.
+2. **Open `Sales_Report.pbit`** in [Power BI Desktop](https://www.microsoft.com/en-us/power-platform/products/power-bi/desktop) (free).
+3. This is a **template (`.pbit`)**, not a `.pbix` — it ships with the full data model, report pages, and DAX measures, but no embedded data. On first open, Power BI will prompt you to connect a data source (or fill in any parameters the template defines).
+4. **Refresh the model** once connected to populate the visuals.
+
+---
+
+## Repository Structure
+
+```
+Sales-Report-main/
+│
+├── Sales_Report.pbit              # Power BI report template (model + visuals, no embedded data)
+├── Snapshot_of_the_dashboard.png  # Preview of the report
+└── README.md
+```
